@@ -4,7 +4,7 @@
 
 $PDFs = Get-ChildItem * -File -Include *.pdf
 
-if (Test-Path "C:\Program Files\bioPDF\PDF Writer\gs\gswin64c.exe") {
+if (Test-Path "C:\Program Files\gs\gswin64c.exe") {
 	if ($PDFs) {
 		if (Test-Path "Combined.pdf") {
 			"You already have a Combined.pdf here! Please delete, move, or rename it and try again."
@@ -20,7 +20,7 @@ if (Test-Path "C:\Program Files\bioPDF\PDF Writer\gs\gswin64c.exe") {
 			[Console]::ReadKey() > $null
 			
 			# Use Ghostscript via CMD to merge all PDFs into a single one.
-			& "C:\Program Files\bioPDF\PDF Writer\gs\gswin64c.exe" -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="Combined.pdf" $PDFPaths | Out-Default
+			& "C:\Program Files\gs\gswin64c.exe" -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="Combined.pdf" $PDFPaths | Out-Default
 				
 			if ((Get-Item .\Combined.pdf).length -gt 5000) { # Make sure the resulting PDF is greater than 5kb
 				$PDFs | Remove-Item # Delete the source PDFs after merge.
@@ -37,7 +37,7 @@ if (Test-Path "C:\Program Files\bioPDF\PDF Writer\gs\gswin64c.exe") {
 	}
 }
 else {
-	"Could not locate C:\Program Files\bioPDF\PDF Writer\gs\gswin64c.exe"
+	"Could not locate C:\Program Files\gs\gswin64c.exe"
 	"Please install Ghostscript and make sure this file exists (or edit this script to point to the file)."
 }
 [Console]::ReadKey() > $null # Pause script (waiting for any user input) so any of the above messages don't immediately close.
