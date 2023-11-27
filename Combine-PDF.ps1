@@ -26,7 +26,7 @@ if ($GS = Get-ChildItem -Path "C:\Program Files\gs\" -Recurse -Include gswin*.ex
 			}
 			else {
 				"`nCombined!"
-				if ((Read-Host "If you want to delete ALL source PDFs now, please enter the letter 'Y'") -eq "Y") {
+				if ((Read-Host "If you want to delete all of the source PDFs now, please enter the letter 'Y'") -eq "Y") {
 					$PDFs | Remove-Item # Delete the source PDFs after merge.
 					"Deleted"
 				}
